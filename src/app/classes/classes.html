@@ -1,0 +1,21 @@
+<div class="class-container">
+  <h2>Classroom Management</h2>
+
+  <div class="add-box">
+    <input [(ngModel)]="className" placeholder="Class Name">
+    <input [(ngModel)]="roomNumber" placeholder="Room No ">
+    <button (click)="addClass()"> Create Class</button>
+  </div>
+
+  <div class="class-grid">
+    @for (c of classList; track c.id) {
+      <div class="class-card">
+        <div class="card-header">{{ c.name }}</div>
+        <div class="card-body">
+          <p>Location: Room {{ c.room }}</p>
+          <span class="status-badge">Active</span>
+        </div>
+      </div>
+    }
+  </div>
+</div>

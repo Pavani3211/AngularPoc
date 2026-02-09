@@ -1,0 +1,16 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+  isLoggedIn(): boolean {
+    return localStorage.getItem('loggedIn') === 'true';
+  }
+
+  login(): void {
+    localStorage.setItem('loggedIn', 'true');
+  }
+
+  logout(): void {
+    localStorage.removeItem('loggedIn');
+  }
+}

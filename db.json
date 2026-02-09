@@ -1,0 +1,10 @@
+﻿{
+  "students": [
+    { "id": "1", "name": "Pavani", "email": "pavani@gmail.com", "class": "10th", "phone": "1234567890" },
+    { "id": "2", "name": "Sravani", "email": "sravani@gmail.com", "class": "11th", "phone": "0987654321" }
+  ],
+  "teachers": [
+    { "id": "1", "name": "Pooja", "subject": "Mathematics" },
+    { "id": "2", "name": "Pallavi", "subject": "Science" }
+  ]
+}
