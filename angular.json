@@ -5,6 +5,18 @@
     "packageManager": "npm",
     "analytics": "b648d887-0ec8-46a8-b5d2-f94f71a6c609"
   },
+  "schematics": {
+  "@schematics/angular:component": {
+    "standalone": false
+  },
+  "@schematics/angular:directive": {
+    "standalone": false
+  },
+  "@schematics/angular:pipe": {
+    "standalone": false
+  }
+},
+
   "newProjectRoot": "projects",
   "projects": {
     "student_management_project": {
@@ -68,6 +80,7 @@
         "test": {
           "builder": "@angular/build:unit-test"
         }
+        
       }
     }
   }

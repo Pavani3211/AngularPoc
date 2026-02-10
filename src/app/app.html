@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="main-wrapper" [class.logged-in]="showSidebar">
   
   @if (showSidebar) {
@@ -17,14 +17,24 @@
   }
 
   <main class="content-area">
-    <!-- Header/Navbar (Only shows if logged in) -->
     @if (showSidebar) {
       <header class="top-nav">
         <span>Welcome, Admin</span>
       </header>
     }
 
-    <!-- This is where Login, Register, and StudentList will load -->
+   
     <router-outlet></router-outlet>
   </main>
-</div>
+</div> -->
+<nav>
+        <ul>
+          <li><a routerLink="/authmodule/login">Login</a></li>
+          <li><a routerLink="/authmodule/register">Register</a></li> 
+          <li><a routerLink="/dashboardmodule/students"> Classes</a></li>
+          <li><a routerLink="/dashboardmodule/classes">Teachers</a></li>
+          <li><a routerLink="/dashboardmodule/teacher" > Students</a></li>
+          
+        </ul>
+ </nav>
+<router-outlet></router-outlet>
