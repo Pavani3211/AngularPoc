@@ -1,0 +1,6 @@
+﻿{
+  "teachers": [
+    { "id": "1", "name": "Pooja", "subject": "Mathematics" },
+    { "id": "2", "name": "Pallavi", "subject": "Science" }
+  ]
+}

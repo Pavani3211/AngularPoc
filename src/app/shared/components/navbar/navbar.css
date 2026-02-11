@@ -1,0 +1,23 @@
+.content-area {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background: #333;
+    color: white;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}

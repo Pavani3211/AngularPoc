@@ -1,0 +1,27 @@
+<div class="login-container">
+  <h2 >Login</h2>
+
+  <table class="login-table">
+    <tr>
+      <td><label for="username">Username</label></td>
+      <td>
+        <input type="text" name="username" type="text" [(ngModel)]="username" placeholder="Enter registered name">
+      </td>
+    </tr>
+
+    <tr>
+      <td><label for="password">Password</label></td>
+      <td>
+        <input type="text" name="password" type="password" [(ngModel)]="password" placeholder="Enter password">
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" class="btn-row">
+        <button (click)="onLogin()">Login</button>
+        <button type="button" (click)="onRegister()" class="btn-secondary">Register </button>
+      </td>
+    </tr>
+  </table>
+</div>
+<router-outlet></router-outlet>
