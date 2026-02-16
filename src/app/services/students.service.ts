@@ -3,6 +3,7 @@ import { Student } from '../models/student';
 import { v4 as uuidv4 } from 'uuid'; 
 
 @Injectable({ providedIn: 'root' })
+
 export class StudentService {
   private storageKey = 'Students';
 
@@ -12,11 +13,12 @@ export class StudentService {
     return raw.map((s: any) => new Student(s));
   }
 
-  createStudent(student: Student): void {
+  createStudent(student: Student): Student {
     const list = this.getStudents();
     student.id = uuidv4();
     list.push(student);
     localStorage.setItem(this.storageKey, JSON.stringify(list));
+    return student;
   }
 
   updateStudent(updated: Student): void {

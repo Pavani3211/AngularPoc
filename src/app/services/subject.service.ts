@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 @Injectable({ providedIn: 'root' })
 export class SubjectService {
 
-  private storageKey = 'SubjectList_Master';
+  private storageKey = 'Subjects';
 
   getSubjects(): Array<Subject> {
     const subjectsJson = localStorage.getItem(this.storageKey);

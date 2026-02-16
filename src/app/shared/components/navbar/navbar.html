@@ -1,14 +1,5 @@
-<nav class="navbar">
-    <div class="logo">Student Portal</div>
-    <ul class="nav-links">
-        <li><a routerLink="/login">Login</a></li>
-        <li><a routerLink="/registration">Register</a></li>
-        <li><a routerLink="/studentlist">View List</a></li>
-    </ul>
-</nav>
-
 <main class="content-area">
     <header class="top-nav">
-      <span>Welcome, Admin</span>
+        <span>Welcome, {{loggedInUser.name}}</span>
     </header>
-  </main>
+</main>

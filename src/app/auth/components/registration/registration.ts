@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudentService } from '../../../services/students.service';
 import { Student } from '../../../models/student';
-
+import { StudentRequest } from '../../../models/auth/registerRequest';
 
 @Component({
   selector: 'app-register',
@@ -11,39 +11,40 @@ import { Student } from '../../../models/student';
   styleUrl: './registration.scss'
 })
 export class RegisterComponent {
-  studentname: string = '';
-  age: string = '';
-  gender: string = '';
-  email: string = '';
-  class: string = '';
-  password: string = '';
+  studentRequest: StudentRequest = { name: '', age: '', class: '', email: '', gender: '', password: '' } as StudentRequest;
+  error: string = '';
 
   constructor(
-    private studentService: StudentService, 
+    private studentService: StudentService,
     private router: Router
-  ) {}
+  ) { }
 
   onRegister() {
- 
-    if (!this.studentname || !this.email || !this.password) {
-      alert("Please fill in the required fields (Name, Email, and Password)");
+    if (!this.validateForm()) {
       return;
     }
 
-    const newStudent = new Student({
-      studentname: this.studentname,
-      age: this.age,
-      gender: this.gender,
-      email: this.email,
-      class: this.class,
-      password: this.password
-    });
+    let studentReq = new Student(this.studentRequest);
+    let student = this.studentService.createStudent(studentReq);
+    if(!student.id){
+      this.error = 'Unable to register user. please try again.';
+      return;
+    }
 
-    this.studentService.createStudent(newStudent);
-    localStorage.setItem('isLoggedIn', 'true');
+    this.router.navigate(['/auth/login']);
+  }
 
-    alert("Registration Successful!");
-  
-    this.router.navigate(['/dashboard']);
+  private validateForm(): boolean {
+    if (!this.studentRequest.name
+      || !this.studentRequest.age
+      || !this.studentRequest.class
+      || !this.studentRequest.email
+      || !this.studentRequest.gender
+      || !this.studentRequest.password) {
+        this.error = 'Please fill all the required fields.'
+        return false;
+    }
+
+    return true;
   }
 }

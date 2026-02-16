@@ -1,22 +1,25 @@
 
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { Sidebar } from './shared/components/sidebar/sidebar';
 import { CommonModule } from '@angular/common';
+import { Navbar } from './shared/components/navbar/navbar';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports:[RouterModule, Sidebar,CommonModule],
+  imports: [RouterModule, Sidebar, Navbar, CommonModule],
   templateUrl: './app.html',
-  styleUrls: ['./app.css']
+  styleUrl: './app.scss',
 })
 export class App {
-  constructor(public router:Router) {
-  }
- isAuthPage(): boolean {
-   const url = this.router.url;
-  return url.includes('/auth') || url.includes('/login') || url.includes('/register');
-  }
   
+  constructor(private authService: AuthService) {
+  }
+
+  isAuthPage(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
 }

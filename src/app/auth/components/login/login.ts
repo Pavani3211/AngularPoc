@@ -20,13 +20,11 @@ export class Login {
 
   onLogin() {
     const foundUser = this.auth.login(this.loginRequest);
-
     if (!foundUser) {
       this.error = 'Invalid username or password. Please try again.';
       return;
     }
-
-    localStorage.setItem('currentUser', JSON.stringify(foundUser));
+    
     this.router.navigate(['/dashboard']);
   }
 

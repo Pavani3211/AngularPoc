@@ -1,10 +1,14 @@
-// Variables
+
 $primary-color: #0078d4;
 $hover-color: #005ea6;
 $text-main: #333;
 $text-muted: #666;
 $border-color: #ddd;
 $white: #ffffff;
+
+.clr-red{
+    color: red;
+}
 
 .registration-wrapper {
   display: flex;

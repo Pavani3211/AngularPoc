@@ -8,12 +8,11 @@ $overlay-bg: rgba(0, 0, 0, 0.5);
 
 .students-wrapper {
   padding: 1.5rem;
-  max-width: 1100px;
   margin: 0 auto;
 
   
   .header-area {
-     display: flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;

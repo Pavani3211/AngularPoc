@@ -1,19 +1,19 @@
 <div class="teacher-management-wrapper">
-  
+
 
   <div class="teacher-form-card">
     <div class="form-grid">
       <div class="input-field">
         <input [(ngModel)]="newTeacher.name" placeholder="Teacher Name">
       </div>
-      
+
       <div class="input-field">
         <select [(ngModel)]="newTeacher.subjectId" (change)="onSubjectChange(newTeacher.subjectId)">
           <option value="" disabled selected>Select Subject</option>
           <option *ngFor="let s of subjects" [value]="s.id">{{s.name}}</option>
         </select>
       </div>
-      
+
       <div class="button-field">
         <button (click)="saveTeacher()">Save Teacher</button>
       </div>
@@ -34,7 +34,7 @@
           <td>{{t.name}}</td>
           <td>{{t.subjectName}}</td>
           <td class="action-cell">
-          
+
             <button class="btn-delete" (click)="prepareDelete(t.id)">Delete</button>
           </td>
         </tr>
@@ -47,8 +47,8 @@
   <div class="modal-overlay" *ngIf="showDeleteModal">
     <div class="modal-card delete-confirm">
       <h4 class="title-danger">Confirm Deletion</h4>
-      <p>Are you sure you want to remove this teacher? This cannot be undone.</p>
-      
+      <p>Are you sure you want to delete this teacher?</p>
+
       <div class="modal-footer footer-center">
         <button class="btn-cancel" (click)="closeDeleteModal()">Cancel</button>
         <button class="btn-confirm" (click)="confirmDelete()">Delete Now</button>

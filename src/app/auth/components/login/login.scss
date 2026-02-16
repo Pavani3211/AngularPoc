@@ -1,4 +1,17 @@
-@import 'src/styles/variables';
+$primary-blue: #0078d4;
+$hover-blue: #005ea6;
+$white: #ffffff;
+$gray-text: #666;
+
+.login-page {
+  .clr-red {
+    color: red;
+  }
+
+  .error-msg {
+    font-size: 12px;
+  }
+}
 
 .login-page {
   display: flex;
@@ -7,7 +20,8 @@
   min-height: 80vh;
 
   .login-card {
-    width: 100%;
+    width: 350px;
+    ;
     padding: 40px;
     background: $white;
     border-radius: 12px;
@@ -38,7 +52,7 @@
       }
     }
 
-    .action-area {
+    .action {
       display: flex;
       flex-direction: column;
       align-items: center;

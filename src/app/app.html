@@ -1,11 +1,10 @@
-<div class="main-wrapper" [class.logged-in]="!isAuthPage()">
+<div class="app" [class.logged-in]="!isAuthPage()">
+  <div class="side-nav">
+    <app-sidebar *ngIf="isAuthPage()"></app-sidebar>
+  </div>
 
-  <app-sidebar *ngIf="!isAuthPage()"></app-sidebar>
-
-  <main class="content-area">                
-    <header class="top-nav" *ngIf="!isAuthPage()">
-      <span>Welcome, Admin</span>
-    </header>
+  <main class="app-body">                
+    <app-navbar *ngIf="isAuthPage()"></app-navbar>
 
     <section class="router-container">
       <router-outlet></router-outlet>

@@ -6,14 +6,20 @@ import { TeacherComponent } from './components/teachers/teachers';
 import { Dashboard } from './components/dashboard/dashboard';
 import { StudentslistComponent } from './components/studentslist/studentslist';
 import { SubjectComponent } from './subjects/subjects';
+import { Home } from './components/home/home';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'studentslist', pathMatch: 'full' },
-  { path: 'studentslist', component: StudentslistComponent },
-  { path: 'classes', component: ClassComponent },
-  { path: 'teachers', component: TeacherComponent },
-  {path:'dashboard',component:Dashboard},
-  {path:'subjects',component:SubjectComponent}
+  {
+    path: '', component: Home,
+    children: [
+      { path: '', redirectTo: 'studentslist', pathMatch: 'full' },
+      { path: 'studentslist', component: StudentslistComponent },
+      { path: 'classes', component: ClassComponent },
+      { path: 'teachers', component: TeacherComponent },
+      { path: 'dashboard', component: Dashboard },
+      { path: 'subjects', component: SubjectComponent }
+    ]
+  }
 ];
 
 @NgModule({

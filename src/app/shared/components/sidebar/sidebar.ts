@@ -11,6 +11,7 @@ export class Sidebar {
   constructor(private router: Router) {
 
   }
+
   onLogout() {
     if (confirm("Logout?")) {
       this.router.navigate(['auth/login']);

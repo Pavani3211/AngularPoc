@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { StorageKeys } from '../constants/constants';
 import { Teacher } from '../models/teachers/teacher';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({ providedIn: 'root' })
 export class TeacherService {
 
-  storageKey = StorageKeys.Teachers;
+private StorageKeys='Teachers'
 
   getAllTeachers(): Array<Teacher> {
     return this.getLocalTeachers();
@@ -32,14 +31,14 @@ export class TeacherService {
   }
 
   getLocalTeachers(): Array<Teacher> {
-    const teachersJson = localStorage.getItem(this.storageKey);
+    const teachersJson = localStorage.getItem(this.StorageKeys);
     const teachers = !!teachersJson ? JSON.parse(teachersJson) : [];
     return teachers.map((teacher: any) => new Teacher(teacher));
   }
 
   saveLocalTeachers(teachers: Array<Teacher>) {
     const teachersJson = JSON.stringify(teachers);
-    return localStorage.setItem(this.storageKey, teachersJson);
+    return localStorage.setItem(this.StorageKeys, teachersJson);
   }
 
  deleteTeacher(id: string): void {

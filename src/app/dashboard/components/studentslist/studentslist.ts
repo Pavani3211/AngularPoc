@@ -33,7 +33,7 @@ export class StudentslistComponent implements OnInit {
     this.showModal = true;
   }
 
-  startEdit(student: Student) {
+  editStudent(student: Student) {
     this.isEditMode = true;
     this.showModal = true;
 

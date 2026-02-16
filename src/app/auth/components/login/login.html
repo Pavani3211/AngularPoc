@@ -3,17 +3,16 @@
     <h2>Login</h2>
 
     <div class="form-group">
-      <input type="text" name="username" [(ngModel)]="loginRequest.username" placeholder="user name">
+      <input type="text" name="username" [(ngModel)]="loginRequest.username" placeholder="Email" autocomplete="off">
     </div>
 
     <div class="form-group">
-      <input type="password" name="password" [(ngModel)]="loginRequest.password" placeholder=" password">
+      <input type="password" name="password" [(ngModel)]="loginRequest.password" placeholder="Password"
+        autocomplete="off">
     </div>
-
-    <div class="action-area">
+    <span class="clr-red error-msg" *ngIf="error">{{error}}</span>
+    <div class="action">
       <button (click)="onLogin()" class="login-btn">Login</button>
-      <span *ngIf="error">{{error}}</span>
-      
       <div class="signup-link">
         <span>Don't have an account?</span>
         <a routerLink="/auth/register">Sign up</a>

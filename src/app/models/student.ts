@@ -1,6 +1,6 @@
 export class Student{
        id: string;
-       studentname: string;
+       name: string;
        age: string;
        gender:string;
        class: string;
@@ -10,7 +10,7 @@ export class Student{
     constructor(args: any) {
         args = args ?? {};
         this.id = args.id;
-        this.studentname = args.studentname;
+        this.name = args.name;
         this.age = args.age;
         this.gender =args.gender;
         this.class = args.class;

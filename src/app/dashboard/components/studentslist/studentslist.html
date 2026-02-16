@@ -17,12 +17,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let s of students">
-          <td>{{ s.studentname }}</td>
+          <td>{{ s.name }}</td>
           <td>{{ s.age }}</td>
           <td>{{ s.gender }}</td>
           <td>{{ s.class }}</td>
           <td class="action-cells">
-            <button class="btn-edit" (click)="startEdit(s)">Edit</button>
+            <button class="btn-edit" (click)="editStudent(s)">Edit</button>
             <button class="btn-delete-row" (click)="deleteStudent(s.id)">Delete</button>
           </td>
         </tr>
@@ -38,12 +38,12 @@
     <div class="modal-card">
       <h4>{{ isEditMode ? 'Edit' : 'Add' }} Student</h4>
       <div class="form-body">
-        <input [(ngModel)]="newStudent.studentname" placeholder="Name" class="form-input">
+        <input [(ngModel)]="newStudent.name" placeholder="Name" class="form-input">
         <input [(ngModel)]="newStudent.age" placeholder="Age" class="form-input">
         <input [(ngModel)]="newStudent.class" placeholder="Class" class="form-input">
         <input [(ngModel)]="newStudent.gender" placeholder="Gender" class="form-input">
         <input [(ngModel)]="newStudent.email" placeholder="Email" class="form-input">
-        <input [(ngModel)]="newStudent.password" type="password" placeholder="Password" class="form-input">
+     
       </div>
       
       <div class="modal-footer">
