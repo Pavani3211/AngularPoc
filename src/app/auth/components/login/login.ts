@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { StudentService } from '../../../services/students.service';
+import { AuthService } from '../../../services/auth.service';
+import { LoginRequest } from '../../../models/auth/loginrequest';
 
 @Component({
   selector: 'app-login',
@@ -9,38 +10,24 @@ import { StudentService } from '../../../services/students.service';
   styleUrl: './login.scss',
 })
 export class Login {
-  username = '';
-  password = '';
+  loginRequest: LoginRequest = {
+    username: '',
+    password: '',
+  };
+  error: string | null = null;
 
-  
-  private router = inject(Router);
-  private studentService = inject(StudentService);
+  constructor(private router: Router, private auth: AuthService) { }
 
   onLogin() {
+    const foundUser = this.auth.login(this.loginRequest);
 
-    const studentsArray = this.studentService.getStudents();
-
-    if (studentsArray.length === 0) {
-      alert('No users found! Redirecting to Registration.');
-      this.onRegister();
+    if (!foundUser) {
+      this.error = 'Invalid username or password. Please try again.';
       return;
     }
 
-    const foundUser = studentsArray.find((student: any) =>
-      student.studentname === this.username && student.password === this.password
-    );
-
-    if (foundUser) {
-   
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('currentUser', JSON.stringify(foundUser));
-
-      alert(`Login Successful! Welcome ${foundUser.studentname}`);
-      
-      this.router.navigate(['/dashboard/dashboard']); 
-    } else {
-      alert('Invalid username or password. Please try again.');
-    }
+    localStorage.setItem('currentUser', JSON.stringify(foundUser));
+    this.router.navigate(['/dashboard']);
   }
 
   onRegister() {
