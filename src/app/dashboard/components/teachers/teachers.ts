@@ -1,49 +1,70 @@
 import { Component, OnInit } from '@angular/core';
+import { Teacher, Subject } from '../../../models/teachers/teacher';
+import { TeacherService } from '../../../services/teacher.service';
+import { SubjectService } from '../../../services/subject.service';
 
 @Component({
   selector: 'app-teachers',
   standalone: false,
   templateUrl: './teachers.html',
-  styleUrl: './teachers.css'
+  styleUrl: './teachers.scss'
 })
-export class Teachers implements OnInit {
-  teachers: any[] = [];
-  
-  teacherName = '';
-  subject = '';
-  experience = '';
+export class TeacherComponent implements OnInit {
+  teachers: Teacher[] = [];
+  subjects: Subject[] = [];
+  newTeacher: Teacher = new Teacher({});
+ 
+  showDeleteModal: boolean = false;
+  selectedTeacherId: string | null = null;
+
+  constructor(
+    private teacherService: TeacherService,
+    private subjectService: SubjectService 
+  ) {}
 
   ngOnInit() {
-    this.loadTeachers();
+    this.loadAllData();
   }
 
-  loadTeachers() {
-    const data = localStorage.getItem('teacherList');
-    this.teachers = data ? JSON.parse(data) : [];
+  loadAllData() {
+    this.teachers = this.teacherService.getAllTeachers();
+    this.subjects = this.subjectService.getSubjects(); 
   }
 
-  addTeacher() {
-    if (this.teacherName && this.subject) {
-      const newTeacher = {
-        id: Date.now(),
-        name: this.teacherName,
-        subject: this.subject,
-        experience: this.experience
-      };
-      this.teachers.push(newTeacher);
-      localStorage.setItem('teacherList', JSON.stringify(this.teachers));
-      
-      this.teacherName = '';
-      this.subject = '';
-      this.experience = '';
-      alert('Teacher added successfully!');
+  onSubjectChange(id: string) {
+    const sub = this.subjects.find(s => s.id === id);
+    if (sub) {
+      this.newTeacher.subjectName = sub.name;
     }
   }
 
-  deleteTeacher(id: number) {
-    if (confirm("Remove this teacher?")) {
-      this.teachers = this.teachers.filter(t => t.id !== id);
-      localStorage.setItem('teacherList', JSON.stringify(this.teachers));
+  saveTeacher() {
+    this.teacherService.createTeacher(this.newTeacher);
+    this.newTeacher = new Teacher({});
+    this.loadAllData();
+  }
+
+  editTeacher(updatedTeacher: Teacher) {
+
+    this.newTeacher = new Teacher({ ...updatedTeacher });
+  }
+
+
+  prepareDelete(id: string) {
+    this.selectedTeacherId = id;
+    this.showDeleteModal = true;
+  }
+
+  confirmDelete() {
+    if (this.selectedTeacherId) {
+      this.teacherService.deleteTeacher(this.selectedTeacherId);
+      this.closeDeleteModal();
+      this.loadAllData(); 
     }
+  }
+
+  closeDeleteModal() {
+    this.showDeleteModal = false;
+    this.selectedTeacherId = null;
   }
 }

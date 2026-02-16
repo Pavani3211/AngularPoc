@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing-module';
 import { FormsModule } from '@angular/forms';
 import { Login } from './components/login/login';
-import { Registration } from './components/registration/registration';
 import { RouterModule } from '@angular/router';
+import { RegisterComponent } from './components/registration/registration';
 
 @NgModule({
   declarations: [
     Login,
-    Registration
+    RegisterComponent
   ],
   imports: [
     CommonModule,

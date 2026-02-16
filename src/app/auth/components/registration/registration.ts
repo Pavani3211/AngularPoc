@@ -1,43 +1,49 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { StudentService } from '../../../services/students.service';
+import { Student } from '../../../models/student';
+
 
 @Component({
-  selector: 'app-registration',
-  standalone: false, 
+  selector: 'app-register',
+  standalone: false,
   templateUrl: './registration.html',
-  styleUrls: ['./registration.css']
+  styleUrl: './registration.scss'
 })
-export class Registration {
-  username = '';
-  age = '';
-  gender = '';
-  email = '';
-  stdClass = '';
-  password = '';
+export class RegisterComponent {
+  studentname: string = '';
+  age: string = '';
+  gender: string = '';
+  email: string = '';
+  class: string = '';
+  password: string = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private studentService: StudentService, 
+    private router: Router
+  ) {}
 
   onRegister() {
-  
-    if (this.username && this.password) {
-    
-      const newStudent = {
-        name: this.username, 
-        age: this.age,
-        gender: this.gender,
-        email: this.email,
-        stdClass: this.stdClass,
-        password: this.password
-      };
-      const existingData = localStorage.getItem('studentList');
-      const students = existingData ? JSON.parse(existingData) : [];
-      students.push(newStudent);
-      localStorage.setItem('studentList', JSON.stringify(students));
-
-      alert('Registration Successful! Redirecting to Login...');
-      this.router.navigate(['/auth/login']);
-    } else {
-      alert('Error: Name and Password are required!');
+ 
+    if (!this.studentname || !this.email || !this.password) {
+      alert("Please fill in the required fields (Name, Email, and Password)");
+      return;
     }
+
+    const newStudent = new Student({
+      studentname: this.studentname,
+      age: this.age,
+      gender: this.gender,
+      email: this.email,
+      class: this.class,
+      password: this.password
+    });
+
+    this.studentService.createStudent(newStudent);
+    localStorage.setItem('isLoggedIn', 'true');
+
+    alert("Registration Successful!");
+  
+    this.router.navigate(['/dashboard']);
   }
 }

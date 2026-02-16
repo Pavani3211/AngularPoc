@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { Login } from './auth/components/login/login';
-import { Registration } from './auth/components/registration/registration';
+// import { Login } from './auth/components/login/login';
+// import { Registration } from './auth/components/registration/registration';
 import { Dashboard } from './dashboard/components/dashboard/dashboard';
-import { Studentslist } from './dashboard/components/studentslist/studentslist';
-import { Classes } from './dashboard/components/classes/classes';
-import { authGuard } from './services/auth.guard';
+//import { Studentslist } from './dashboard/components/studentslist/studentslist';
+// import { Classes } from './dashboard/components/classes/classes';
+import { authGuard } from './guards/auth.guard';
 // import { AuthmoduleModule } from './authmodule/authmodule-module';
 
 export const routes: Routes = [

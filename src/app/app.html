@@ -1,13 +1,13 @@
-<div class="main-wrapper" [class.logged-in]="!isAuthPage()" style="display: flex; min-height: 100vh;">
+<div class="main-wrapper" [class.logged-in]="!isAuthPage()">
 
   <app-sidebar *ngIf="!isAuthPage()"></app-sidebar>
 
-  <main class="content-area" style="flex: 1; display: flex; flex-direction: column;">                
+  <main class="content-area">                
     <header class="top-nav" *ngIf="!isAuthPage()">
       <span>Welcome, Admin</span>
     </header>
 
-    <section class="router-container" style="flex: 1; display: flex; justify-content: center; align-items: center;">
+    <section class="router-container">
       <router-outlet></router-outlet>
     </section>
   </main>

@@ -1,22 +1,83 @@
-<div class="class-container">
-  <h2>Classroom Management</h2>
+<div class="class-management-wrapper">
+  <h2 class="page-title">Classroom Data</h2>
 
-  <div class="add-box">
-    <input [(ngModel)]="className" placeholder="Class Name">
-    <input [(ngModel)]="roomNumber" placeholder="Room No ">
-    <button (click)="addClass()"> Create Class</button>
+  <div class="add-box-container">
+    <h4 class="section-title">Add New Class</h4>
+    <div class="form-row">
+      <div class="input-group">
+        <label>Class Name</label>
+        <input type="text" [(ngModel)]="newClass.classname" placeholder="e.g. 10th Standard">
+      </div>
+      <div class="input-group">
+        <label>Room Number</label>
+        <input type="text" [(ngModel)]="newClass.roomno" placeholder="e.g. Room 101">
+      </div>
+      <div class="action-group">
+  
+        <button class="btn-create" (click)="saveClass()">
+          {{ isEditMode ? 'Update Class' : 'Create Class' }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Class Name</th>
+          <th>Room No</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of classList">
+          <td>{{ c.classname }}</td>
+          <td>{{ c.roomno }}</td>
+          <td class="action-cells">
+            <button class="btn-edit" (click)="editClass(c)">Edit</button>
+            <button class="btn-delete" (click)="deleteClass(c.id)">Delete</button>
+          </td>
+        </tr>
+    
+        <tr *ngIf="classList.length === 0">
+          <td colspan="3" class="empty-row">No classes found in the system.</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <div class="class-grid">
-    @for (c of classList; track c.id) {
-      <div class="class-card">
-        <div class="card-header">{{ c.name }}</div>
-        <div class="card-body">
-          <p>Location: Room {{ c.room }}</p>
-          <span class="status-badge">Active</span>
+  <div *ngIf="isEditMode" class="edit-overlay-container">
+    <div class="edit-card">
+      <h3 class="edit-title">Update Class Details</h3>
+
+      <div class="form-grid">
+        <div class="input-group">
+     
+          <input [(ngModel)]="newClass.classname" placeholder="e.g. 10th Standard" />
+        </div>
+
+        <div class="input-group">
+          <input [(ngModel)]="newClass.roomno" placeholder="e.g. Room 101" />
         </div>
       </div>
-    }
+
+      <div class="footer-actions">
+        <button class="btn-save" (click)="saveClass()">Save Changes</button>
+        <button class="btn-cancel" (click)="resetForm()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal-overlay" *ngIf="showDeleteModal">
+    <div class="modal-card delete-confirm">
+      <h4 class="title-danger">Confirm Deletion</h4>
+      <p>Are you sure you want to delete this class? This action cannot be undone.</p>
+
+      <div class="modal-footer footer-center">
+        <button class="btn-cancel" (click)="closeDeleteModal()">Cancel</button>
+        <button class="btn-confirm" (click)="confirmDelete()">Delete Now</button>
+      </div>
+    </div>
   </div>
 </div>
-<router-outlet></router-outlet>

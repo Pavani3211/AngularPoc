@@ -5,7 +5,7 @@ import { Router, RouterModule } from '@angular/router';
   selector: 'app-sidebar',
   imports: [RouterModule],
   templateUrl: './sidebar.html',
-  styleUrl: './sidebar.css',
+  styleUrl: './sidebar.scss',
 })
 export class Sidebar {
   constructor(private router: Router) {

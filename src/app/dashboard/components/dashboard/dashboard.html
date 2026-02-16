@@ -1,33 +1,28 @@
-
-<div class="dashboard-container">
-  <h2>Admin Dashboard Overview</h2>
+<div class="dashboard-wrapper">
+  <h2 class="dashboard-title">Admin Dashboard Overview</h2>
   
-  <div class="card-grid">
+  <div class="stats-grid">
   
-    <div class="card student-card">
-      <div class="card-info">
-        <h3>Total Students</h3>
-        <p class="count">{{ totalStudents }}</p>
+    <div class="stat-card students">
+      <div class="card-content">
+        <h3 class="card-label">Total Students</h3>
+        <p class="card-value">{{ totalStudents }}</p>
       </div>
-   
     </div>
 
-
-    <div class="card teacher-card">
-      <div class="card-info">
-        <h3>Total Teachers</h3>
-        <p class="count">{{ totalTeachers }}</p>
+    <div class="stat-card teachers">
+      <div class="card-content">
+        <h3 class="card-label">Total Teachers</h3>
+        <p class="card-value">{{ totalTeachers }}</p>
       </div>
-   
     </div>
 
-   
-    <div class="card class-card">
-      <div class="card-info">
-        <h3>Total Classes</h3>
-        <p class="count">{{ totalClasses }}</p>
+    <div class="stat-card classes">
+      <div class="card-content">
+        <h3 class="card-label">Total Classes</h3>
+        <p class="card-value">{{ totalClasses }}</p>
       </div>
+    </div>
     
-    </div>
   </div>
 </div>

@@ -1,28 +1,77 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Student } from '../../../models/student';
+import { StudentService } from '../../../services/students.service';
 
 @Component({
   selector: 'app-studentslist',
-  standalone:false,
+  standalone: false,
   templateUrl: './studentslist.html',
-  styleUrl: './studentslist.css',
+  styleUrl: './studentslist.scss'
 })
-export class Studentslist implements OnInit {
- 
-  students: any[] = [];
+export class StudentslistComponent implements OnInit {
+  students: Student[] = [];
+  newStudent: Student = new Student({});
+  
+  showModal: boolean = false;     
+  isEditMode: boolean = false;
+  showDeleteModal: boolean = false; 
+  studentToDeleteId: string = ''; 
+
+  constructor(private studentService: StudentService) {}
 
   ngOnInit() {
+    this.loadData();
+  }
 
-    const data = localStorage.getItem('studentList');
-    
-    if (data) {
-      this.students = JSON.parse(data);
+  loadData() {
+ 
+    this.students = this.studentService.getStudents();
+  }
+  openAddModal() {
+    this.isEditMode = false;
+    this.newStudent = new Student({}); 
+    this.showModal = true;
+  }
+
+  startEdit(student: Student) {
+    this.isEditMode = true;
+    this.showModal = true;
+
+    this.newStudent = new Student({ ...student });
+  }
+
+
+  saveStudent() {
+    if (this.isEditMode) {
+      this.studentService.updateStudent(this.newStudent);
+    } else {
+      this.studentService.createStudent(this.newStudent);
+    }
+    this.closeModal(); 
+    this.loadData();  
+  }
+
+  closeModal() {
+    this.showModal = false;
+    this.newStudent = new Student({});
+    this.isEditMode = false;
+  }
+
+  deleteStudent(id: string) {
+    this.studentToDeleteId = id;
+    this.showDeleteModal = true;
+  }
+
+  confirmDelete() {
+    if (this.studentToDeleteId) {
+      this.studentService.deleteStudent(this.studentToDeleteId);
+      this.closeDeleteModal();
+      this.loadData();
     }
   }
 
-  deleteStudent(index: number) {
-    const isConfirmed = confirm("Are you sure you want to delete this student?");
-    this.students.splice(index, 1); 
-    localStorage.setItem('studentList', JSON.stringify(this.students)); 
+  closeDeleteModal() {
+    this.showDeleteModal = false;
+    this.studentToDeleteId = '';
   }
 }

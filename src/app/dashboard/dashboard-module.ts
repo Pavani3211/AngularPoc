@@ -2,14 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router'; 
 import { DashboardRoutingModule } from './dashboard-routing-module';
-import { Classes } from './components/classes/classes';
-import { Studentslist } from './components/studentslist/studentslist';
-import { Teachers } from './components/teachers/teachers';
+import { ClassComponent } from './components/classes/classes';
+import {  StudentslistComponent } from './components/studentslist/studentslist';
+import { TeacherComponent } from './components/teachers/teachers';
 import { FormsModule } from '@angular/forms';
+import { SubjectComponent } from './subjects/subjects';
+
 
 @NgModule({
   declarations: [
-   Classes,Studentslist,Teachers
+     TeacherComponent,ClassComponent,SubjectComponent,StudentslistComponent
   ],
   imports: [
     FormsModule,

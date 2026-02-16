@@ -1,14 +1,50 @@
 import { Injectable } from '@angular/core';
+import { StorageKeys } from '../constants/constants';
+import { Teacher } from '../models/teachers/teacher';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({ providedIn: 'root' })
 export class TeacherService {
 
-  saveData(key: string, data: any) {
-    localStorage.setItem(key, JSON.stringify(data));
+  storageKey = StorageKeys.Teachers;
+
+  getAllTeachers(): Array<Teacher> {
+    return this.getLocalTeachers();
   }
 
-  getData(key: string): any[] {
-    const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : [];
+  createTeacher(teacher: Teacher): Teacher {
+    let teachers = this.getLocalTeachers();
+    teacher.id = uuidv4();
+    teachers.push(teacher);
+    this.saveLocalTeachers(teachers);
+    return teacher;
   }
+
+  updateTeacher(teacher: Teacher): Teacher {
+    let existingTeachers = this.getLocalTeachers();
+    const eTeacherindex = existingTeachers.findIndex(eTeacher => eTeacher.id == teacher.id);
+    if (eTeacherindex > -1) {
+      existingTeachers[eTeacherindex] = teacher;
+      this.saveLocalTeachers(existingTeachers);
+    }
+
+    return teacher;
+  }
+
+  getLocalTeachers(): Array<Teacher> {
+    const teachersJson = localStorage.getItem(this.storageKey);
+    const teachers = !!teachersJson ? JSON.parse(teachersJson) : [];
+    return teachers.map((teacher: any) => new Teacher(teacher));
+  }
+
+  saveLocalTeachers(teachers: Array<Teacher>) {
+    const teachersJson = JSON.stringify(teachers);
+    return localStorage.setItem(this.storageKey, teachersJson);
+  }
+
+ deleteTeacher(id: string): void {
+  const teachers = this.getLocalTeachers().filter(teacher => teacher.id !== id);
+  this.saveLocalTeachers(teachers);
+}
+
 }

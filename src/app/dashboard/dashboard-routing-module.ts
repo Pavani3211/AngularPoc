@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Studentslist } from './components/studentslist/studentslist';
-import { Classes } from './components/classes/classes';
-import { Teachers } from './components/teachers/teachers';
+// import { Studentslist } from './components/studentslist/studentslist';
+import { ClassComponent } from './components/classes/classes';
+import { TeacherComponent } from './components/teachers/teachers';
 import { Dashboard } from './components/dashboard/dashboard';
+import { StudentslistComponent } from './components/studentslist/studentslist';
+import { SubjectComponent } from './subjects/subjects';
 
 const routes: Routes = [
   { path: '', redirectTo: 'studentslist', pathMatch: 'full' },
-  { path: 'studentslist', component: Studentslist },
-  { path: 'classes', component: Classes },
-  { path: 'teachers', component: Teachers },
-  {path:'dashboard',component:Dashboard}
+  { path: 'studentslist', component: StudentslistComponent },
+  { path: 'classes', component: ClassComponent },
+  { path: 'teachers', component: TeacherComponent },
+  {path:'dashboard',component:Dashboard},
+  {path:'subjects',component:SubjectComponent}
 ];
 
 @NgModule({

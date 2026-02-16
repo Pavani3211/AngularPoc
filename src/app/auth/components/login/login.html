@@ -1,27 +1,24 @@
-<div class="login-container">
-  <h2 >Login</h2>
+<div class="login-page-wrapper">
+  <div class="login-card">
+    <h2>Login</h2>
 
-  <table class="login-table">
-    <tr>
-      <td><label for="username">Username</label></td>
-      <td>
-        <input type="text" name="username" type="text" [(ngModel)]="username" placeholder="Enter registered name">
-      </td>
-    </tr>
+    <div class="form-group">
+      <!-- <label>Username</label> -->
+      <input type="text" name="username" [(ngModel)]="username" placeholder="user name">
+    </div>
 
-    <tr>
-      <td><label for="password">Password</label></td>
-      <td>
-        <input type="text" name="password" type="password" [(ngModel)]="password" placeholder="Enter password">
-      </td>
-    </tr>
+    <div class="form-group">
+      <!-- <label>Password</label> -->
+      <input type="password" name="password" [(ngModel)]="password" placeholder=" password">
+    </div>
 
-    <tr>
-      <td colspan="2" class="btn-row">
-        <button (click)="onLogin()">Login</button>
-        <button type="button" (click)="onRegister()" class="btn-secondary">Register </button>
-      </td>
-    </tr>
-  </table>
+    <div class="action-area">
+      <button (click)="onLogin()" class="login-btn">Login</button>
+      
+      <div class="signup-link">
+        <span>Don't have an account?</span>
+        <a routerLink="/auth/register">Sign up</a>
+      </div>
+    </div>
+  </div>
 </div>
-<router-outlet></router-outlet>

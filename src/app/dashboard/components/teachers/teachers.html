@@ -1,42 +1,58 @@
+<div class="teacher-management-wrapper">
+  
 
-  <div class="add-form shadow-sm">
-    <div class="form-title w-100 mb-2"><small class="text-muted fw-bold">ADD NEW TEACHER</small></div>
-    <input [(ngModel)]="teacherName" type="text" placeholder="Enter Full Name" class="form-control-custom">
-    <input [(ngModel)]="subject" type="text" placeholder="Subject" class="form-control-custom">
-    <button (click)="addTeacher()" class="btn-add">
-      <i class="bi bi-plus-lg"></i> Add Teacher
-    </button>
+  <div class="teacher-form-card">
+    <div class="form-grid">
+      <div class="input-field">
+        <input [(ngModel)]="newTeacher.name" placeholder="Teacher Name">
+      </div>
+      
+      <div class="input-field">
+        <select [(ngModel)]="newTeacher.subjectId" (change)="onSubjectChange(newTeacher.subjectId)">
+          <option value="" disabled selected>Select Subject</option>
+          <option *ngFor="let s of subjects" [value]="s.id">{{s.name}}</option>
+        </select>
+      </div>
+      
+      <div class="button-field">
+        <button (click)="saveTeacher()">Save Teacher</button>
+      </div>
+    </div>
   </div>
 
-  <div class="table-responsive">
-    <table class="teachers-table shadow-sm">
+  <div class="table-container">
+    <table class="teacher-table">
       <thead>
         <tr>
-          <th>Full Name</th>
-          <th>Subject / Department</th>
-          <th class="text-center">Action</th>
+          <th>Teacher Name</th>
+          <th>Subject</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        @for (t of teachers; track t.id) {
-          <tr>
-            <td class="fw-bold text-dark">{{ t.name }}</td>
-            <td><span class="subject-tag">{{ t.subject }}</span></td>
-            <td class="text-center">
-              <button (click)="deleteTeacher(t.id)" class="btn-delete">
-                Remove
-              </button>
-            </td>
-          </tr>
-        } @empty {
-          <tr>
-            <td colspan="3" class="text-center py-5 text-muted">
-              <p class="mb-0">No teachers registered in the system yet.</p>
-            </td>
-          </tr>
-        }
+        <tr *ngFor="let t of teachers">
+          <td>{{t.name}}</td>
+          <td>{{t.subjectName}}</td>
+          <td class="action-cell">
+          
+            <button class="btn-delete" (click)="prepareDelete(t.id)">Delete</button>
+          </td>
+        </tr>
+        <tr *ngIf="teachers.length === 0">
+          <td colspan="3" class="empty-state">No teachers found.</td>
+        </tr>
       </tbody>
     </table>
   </div>
-
-
+  <div class="modal-overlay" *ngIf="showDeleteModal">
+    <div class="modal-card delete-confirm">
+      <h4 class="title-danger">Confirm Deletion</h4>
+      <p>Are you sure you want to remove this teacher? This cannot be undone.</p>
+      
+      <div class="modal-footer footer-center">
+        <button class="btn-cancel" (click)="closeDeleteModal()">Cancel</button>
+        <button class="btn-confirm" (click)="confirmDelete()">Delete Now</button>
+      </div>
+    </div>
+  </div>
+</div>
